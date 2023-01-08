@@ -1,18 +1,14 @@
 package com.beom.attendance.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@ToString
+@Entity
+@Getter
 public class Employee {
 
     @Id
@@ -23,10 +19,11 @@ public class Employee {
     private String name;
 
     @Column
-    private LocalDateTime start;
+    private LocalDateTime startTime;
 
     @Column
-    private LocalDateTime end;
+    private LocalDateTime endTime;
+
 
 
 }
