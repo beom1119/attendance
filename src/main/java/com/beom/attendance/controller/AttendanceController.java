@@ -1,13 +1,18 @@
 package com.beom.attendance.controller;
 
 
-import com.beom.attendance.entity.Employee;
 import com.beom.attendance.service.AttendanceService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.parsing.Problem;
+
+import org.springframework.http.*;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 
+import java.util.List;
+@Slf4j
 @RestController
 public class AttendanceController {
 
@@ -18,11 +23,6 @@ public class AttendanceController {
     }
 
 
-    @GetMapping("/hello")
-    public String hello()
-    {
-        return "hello";
-    }
 
     @GetMapping("/hell123")
     public String hello12321()
@@ -31,9 +31,9 @@ public class AttendanceController {
     }
 
     @GetMapping("/index")
-    public List<Employee> index()
-    {
-        return attendanceService.index();
+    public String hello() throws Exception {
+        attendanceService.sendSlackMessage("이범기");
+        return "index";
     }
 
 
