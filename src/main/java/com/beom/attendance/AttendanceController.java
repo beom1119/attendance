@@ -1,4 +1,4 @@
-package com.beom.attendance.controller;
+package com.beom.attendance;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,8 +27,18 @@ public class AttendanceController {
         request.put("username", "출석 체크");
         request.put("text", name + " 오늘 출근 "+startTime.getHour()+ ":" +startTime.getMinute() + "오늘 퇴근"+startTime.plusHours(8).getHour()+":"+startTime.getMinute());
         HttpEntity<Map<String,Object>> entity = new HttpEntity<Map<String,Object>>(request);
-        String url = "https://hooks.slack.com/services/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"; // 사용할 슬랙의 Webhook URL 넣기
+        String url = "https://hooks.slack.com/services/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"; // 사용할 슬랙의 Webhook URL 넣기
         restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
+        return "hello";
+    }
+
+    @GetMapping("/hello/{name}")
+    public String hello(@PathVariable("name") String name){
+        return name;
+    }
+
+    @GetMapping("/hello")
+    public String hello(){
         return "hello";
     }
 
