@@ -1,12 +1,15 @@
 package com.beom.attendance;
 
 
+
 import lombok.extern.slf4j.Slf4j;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -17,6 +20,11 @@ import java.util.Map;
 @Slf4j
 @RestController
 public class AttendanceController {
+   @Value("${slack.url}")
+   String url;
+
+   @Value("${slack.channel}")
+   String channel;
 
 
     @GetMapping("/slack/{name}")
@@ -27,7 +35,7 @@ public class AttendanceController {
         request.put("username", "출석 체크");
         request.put("text", name + " 오늘 출근 "+startTime.getHour()+ ":" +startTime.getMinute() + "오늘 퇴근"+startTime.plusHours(8).getHour()+":"+startTime.getMinute());
         HttpEntity<Map<String,Object>> entity = new HttpEntity<Map<String,Object>>(request);
-        String url = "https://hooks.slack.com/services/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"; // 사용할 슬랙의 Webhook URL 넣기
+         // 사용할 슬랙의 Webhook URL 넣기
         restTemplate.exchange(url, HttpMethod.POST, entity, String.class);
         return "hello";
     }
@@ -41,5 +49,9 @@ public class AttendanceController {
     public String hello(){
         return "hello";
     }
+
+    @PostMapping
+    public String
+
 
 }
